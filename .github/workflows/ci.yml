@@ -18,7 +18,7 @@ jobs:
       PYTHONPATH: backend/src
       PYTHONUTF8: "1"
       IRODORI_WORKBENCH_MODE: fake
-      IRODORI_WORKBENCH_CONFIG: ${{ runner.temp }}/irodori-ci-missing.toml
+      IRODORI_WORKBENCH_CONFIG: ${{ github.workspace }}/irodori-ci-missing.toml
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
