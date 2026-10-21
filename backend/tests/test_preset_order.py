@@ -1,5 +1,5 @@
+import json
 import pytest
-from pathlib import Path
 from fastapi.testclient import TestClient
 
 from irodori_workbench.app import create_app
@@ -7,8 +7,10 @@ from irodori_workbench.inference import FakeInferenceAdapter
 
 
 @pytest.fixture(autouse=True)
-def example_grouping(monkeypatch):
-    monkeypatch.setenv('IRODORI_VOICE_PROFILE', str(Path(__file__).parents[2]/'config/voice-profile.example.json'))
+def example_grouping(monkeypatch, tmp_path):
+    profile = tmp_path/'test-profile.json'
+    profile.write_text(json.dumps({'works': [[f'Work {letter}', [[f'speaker_{letter.lower()}', f'Speaker {letter}']]] for letter in 'ABCDE']}), encoding='utf-8')
+    monkeypatch.setenv('IRODORI_VOICE_PROFILE', str(profile))
 
 
 def app(root):
@@ -35,14 +37,14 @@ def catalog(c):
 
 def test_default_work_groups_and_manual_order_survive_restart(tmp_path):
     with TestClient(app(tmp_path)) as c:
-        for name in ['一色いろは','伊吹翼','星井美希','高垣楓','櫻木真乃','自定义角色']:
+        for name in ['Speaker E','Speaker D','Speaker C','Speaker B','Speaker A','自定义角色']:
             create(c,name)
         before=catalog(c)
         assert [p['voice_name'] for p in before['items']]==[
-            '櫻木真乃','高垣楓','星井美希','伊吹翼','一色いろは','自定义角色']
+            'Speaker A','Speaker B','Speaker C','Speaker D','Speaker E','自定义角色']
         assert [p['work'] for p in before['items']]==[
-            '偶像大师 闪耀色彩','偶像大师 灰姑娘女孩','偶像大师（本家）',
-            '偶像大师 百万现场','我的青春恋爱物语果然有问题','其他']
+            'Work A','Work B','Work C',
+            'Work D','Work E','其他']
         order=[p['id'] for p in reversed(before['items'])]
         preferences=c.get('/api/v1/preferences').json()
         response=c.put('/api/v1/presets/order',json={'revision':before['order_revision'],'ids':order})
@@ -59,7 +61,7 @@ def test_default_work_groups_and_manual_order_survive_restart(tmp_path):
 
 
 def test_order_rejects_duplicates_missing_ids_and_concurrent_edits(client):
-    a=create(client,'櫻木真乃'); b=create(client,'高垣楓')
+    a=create(client,'Speaker A'); b=create(client,'Speaker B')
     before=catalog(client)
     for ids in [[a['id']],[a['id'],a['id']],[a['id'],'missing']]:
         assert client.put('/api/v1/presets/order',json={'revision':before['order_revision'],'ids':ids}).status_code==422
@@ -69,5 +71,5 @@ def test_order_rejects_duplicates_missing_ids_and_concurrent_edits(client):
     assert r.status_code==200
     assert client.put('/api/v1/presets/order',json={'revision':before['order_revision'],'ids':None}).status_code==409
     current=catalog(client)
-    create(client,'伊吹翼')
+    create(client,'Speaker D')
     assert client.put('/api/v1/presets/order',json={'revision':current['order_revision'],'ids':order}).status_code==409

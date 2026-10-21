@@ -13,26 +13,26 @@ def test_discovery_uses_model_root_and_keeps_chosen_checkpoints(tmp_path, monkey
         (path/'adapter_config.json').write_text('{}')
         (path/'adapter_model.safetensors').write_bytes(b'')
         return path
-    chosen = checkpoint('kiriko_v4')
-    checkpoint('kiriko_v4_2')
-    checkpoint('mamimi_v3')
-    checkpoint('mamimi_v4')
-    newest = checkpoint('mamimi_v4_2')
+    chosen = checkpoint('speaker_a_v4')
+    checkpoint('speaker_a_v4_2')
+    checkpoint('speaker_b_v3')
+    checkpoint('speaker_b_v4')
+    newest = checkpoint('speaker_b_v4_2')
     (root/'broken_v4').mkdir()
     settings = tmp_path/'settings.json'
     settings.write_text(json.dumps({'loras':[
-        {'name':'幽谷霧子', 'path':str(chosen)},
+        {'name':'Example speaker A', 'path':str(chosen)},
         {'name':'outside', 'path':str(tmp_path/'elsewhere')},
     ]}), encoding='utf-8')
     monkeypatch.setenv('IRODORI_LORA_DIR',str(root))
     items = lora_catalog(settings)
     assert len(items) == 4
     assert items[0]['path'] == str(chosen.resolve())
-    mamimi = [item for item in items if item['family']=='mamimi']
-    assert len(mamimi)==2
-    assert mamimi[0]['name'] == '田中摩美々'
-    assert mamimi[0]['path'] == str(newest.resolve())
-    assert {item['model_version'] for item in mamimi} == {'v4','v4_2'}
+    speaker_b = [item for item in items if item['family']=='speaker_b']
+    assert len(speaker_b)==2
+    assert speaker_b[0]['name'] == 'Example speaker B'
+    assert speaker_b[0]['path'] == str(newest.resolve())
+    assert {item['model_version'] for item in speaker_b} == {'v4','v4_2'}
     assert all(item['checkpoint']=='checkpoint_final' for item in items)
     assert len({item['id'] for item in items})==4
     assert all(item['available'] for item in items)
@@ -43,14 +43,14 @@ def test_api_exposes_version_and_freezes_exact_chosen_checkpoint(tmp_path, monke
     from irodori_workbench.app import create_app
     from irodori_workbench.inference import FakeInferenceAdapter
     root=tmp_path/'lora_output'
-    for folder in ['fuyu_v4','fuyu_v4_4']:
+    for folder in ['speaker_c_v4','speaker_c_v4_4']:
         p=root/folder/'checkpoint_final'
         p.mkdir(parents=True)
         (p/'adapter_config.json').write_text('{}')
         (p/'adapter_model.safetensors').write_bytes(b'')
     settings=tmp_path/'settings.json'
-    settings.write_text(json.dumps({'loras':[{'name':'黛冬優子',
-        'path':str(root/'fuyu_v4/checkpoint_final')}]}),encoding='utf-8')
+    settings.write_text(json.dumps({'loras':[{'name':'Example speaker C',
+        'path':str(root/'speaker_c_v4/checkpoint_final')}]}),encoding='utf-8')
     monkeypatch.setenv('IRODORI_LORA_DIR',str(root))
     with TestClient(create_app(tmp_path/'data',FakeInferenceAdapter(),settings)) as c:
         items=c.get('/api/v1/loras').json()['items']
