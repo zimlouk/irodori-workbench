@@ -1,0 +1,5 @@
+{
+  "loras": [
+    {"id": "example-voice-v4", "name": "Example voice", "path": "example_v4/checkpoint_final"}
+  ]
+}

@@ -1,0 +1,39 @@
+--- a/src/irodori_openai_tts/voices.py
++++ b/src/irodori_openai_tts/voices.py
+@@ -31,6 +31,16 @@
+     ref_latent: str | None = None
+     ref_embed: str | None = None
+     no_ref: bool = False
++    ref_wavs: list[str] | None = None
++
++    def __post_init__(self):
++        if self.ref_wavs is not None:
++            if not isinstance(self.ref_wavs, list) or any(
++                not isinstance(path, str) or not path.strip() for path in self.ref_wavs
++            ):
++                raise ValueError("ref_wavs must be an ordered list of non-empty paths.")
++            if self.ref_wavs and (self.ref_wav is not None or self.no_ref):
++                raise ValueError("ref_wavs cannot be combined with ref_wav or no_ref.")
+ 
+ 
+ @dataclass(frozen=True)
+@@ -218,6 +228,11 @@
+             raise ValueError(f"Invalid alias for voice={voice_id!r}.")
+ 
+         no_ref = bool(raw_spec.get("no_ref", False))
++        ref_wavs = raw_spec.get("ref_wavs")
++        if ref_wavs is not None and (not isinstance(ref_wavs, list) or any(
++            not isinstance(path, str) or not path.strip() for path in ref_wavs
++        )):
++            raise ValueError("ref_wavs must be an ordered list of non-empty paths.")
+         ref_wav = raw_spec.get("ref_wav")
+         ref_latent = raw_spec.get("ref_latent")
+         ref_embed = raw_spec.get("ref_embed")
+@@ -231,6 +246,7 @@
+             if ref_embed is None
+             else str(self._resolve_voice_path(str(ref_embed))),
+             no_ref=no_ref,
++            ref_wavs=None if ref_wavs is None else [str(self._resolve_voice_path(path)) for path in ref_wavs],
+         )
+ 
+     def _resolve_voice_path(self, value: str) -> Path:

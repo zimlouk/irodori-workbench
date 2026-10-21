@@ -1,0 +1,179 @@
+.batch-workbench .batch-mode-rules {
+  display: grid;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.batch-workbench .batch-mode-rule-details {
+  border: 1px solid var(--batch-line-soft);
+  border-radius: 9px;
+  background: rgba(11, 13, 10, 0.22);
+  overflow: hidden;
+}
+
+.batch-workbench .batch-mode-rule-details > summary {
+  padding: 6px 9px;
+  color: var(--batch-muted);
+  font-size: 0.64rem;
+  line-height: 1.5;
+  cursor: pointer;
+  user-select: none;
+}
+
+.batch-workbench .batch-mode-rule-details[open] > summary {
+  border-bottom: 1px solid var(--batch-line-soft);
+  color: var(--text, #f2f0e9);
+}
+
+.batch-workbench .batch-mode-rule-body {
+  padding: 9px 10px 10px;
+  color: var(--batch-muted);
+  font-size: 0.65rem;
+  line-height: 1.62;
+}
+
+.batch-workbench .batch-mode-rule-body p,
+.batch-workbench .batch-mode-rule-body ul,
+.batch-workbench .batch-mode-rule-body ol,
+.batch-workbench .batch-mode-rule-body dl,
+.batch-workbench .batch-mode-rule-body pre,
+.batch-workbench .batch-mode-rule-body h4 {
+  margin: 0;
+}
+
+.batch-workbench .batch-mode-rule-body p + ul,
+.batch-workbench .batch-mode-rule-body p + ol {
+  margin-top: 5px;
+}
+
+.batch-workbench .batch-mode-rule-body ul,
+.batch-workbench .batch-mode-rule-body ol {
+  padding-left: 17px;
+}
+
+.batch-workbench .batch-mode-rule-body li + li {
+  margin-top: 3px;
+}
+
+.batch-workbench .batch-rule-block {
+  margin-top: 9px;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(126, 130, 118, 0.22);
+}
+
+.batch-workbench .batch-rule-block h4 {
+  margin-bottom: 5px;
+  color: var(--batch-warm);
+  font-size: 0.66rem;
+  font-weight: 620;
+}
+
+.batch-workbench .batch-rule-values {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px 10px;
+}
+
+.batch-workbench .batch-rule-values > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px;
+  min-width: 0;
+}
+
+.batch-workbench .batch-rule-values dt {
+  color: var(--batch-faint);
+}
+
+.batch-workbench .batch-rule-values dd {
+  min-width: 0;
+  color: var(--text, #f2f0e9);
+  text-align: right;
+}
+
+.batch-workbench .batch-mode-rule-body pre {
+  padding: 6px 8px;
+  border: 1px solid rgba(51, 56, 45, 0.8);
+  border-radius: 7px;
+  color: var(--batch-muted);
+  background: rgba(8, 10, 8, 0.42);
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 0.62rem;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.batch-workbench .batch-rule-note {
+  margin: 8px 0 0;
+  color: var(--batch-faint);
+  font-size: 0.63rem;
+  line-height: 1.55;
+}
+
+.batch-workbench .batch-rule-overview {
+  padding: 12px 12px 0 !important;
+  color: var(--batch-muted);
+  font-size: 0.65rem;
+  line-height: 1.6;
+}
+
+.batch-workbench .batch-check.batch-include-double {
+  white-space: normal;
+  align-items: flex-start;
+  line-height: 1.45;
+}
+
+.batch-workbench .batch-check.batch-include-double input {
+  margin-top: 1px;
+}
+
+.batch-workbench .batch-voice-controls {
+  margin-bottom: 8px;
+  padding: 8px 10px;
+  border: 1px solid rgba(231, 176, 140, 0.22);
+  border-radius: 9px;
+  background: rgba(231, 176, 140, 0.04);
+}
+
+.batch-workbench .batch-emotion-panel {
+  margin-top: 9px;
+  padding-top: 8px;
+  border-top: 1px solid var(--batch-line-soft);
+}
+
+.batch-workbench .batch-emotion-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  border: 1px solid var(--batch-line-soft);
+  border-radius: 8px;
+  color: var(--batch-muted);
+  background: rgba(255, 255, 255, 0.018);
+  font: inherit;
+  font-size: 0.66rem;
+  cursor: pointer;
+}
+
+.batch-workbench .batch-emotion-toggle:hover {
+  color: var(--text, #f2f0e9);
+  border-color: rgba(231, 176, 140, 0.3);
+}
+
+.batch-workbench .batch-emotion-toggle:focus-visible {
+  outline: 2px solid rgba(231, 176, 140, 0.55);
+  outline-offset: 1px;
+}
+
+.batch-workbench .batch-emotion-toggle-state {
+  color: var(--batch-faint);
+  font-size: 0.61rem;
+}
+
+.batch-workbench .batch-emotion-panel .batch-emotion-bar {
+  margin-top: 7px;
+  padding-top: 0;
+  border-top: 0;
+}

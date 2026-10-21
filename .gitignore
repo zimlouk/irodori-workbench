@@ -1,0 +1,63 @@
+.venv/
+data/
+__pycache__/
+.pytest_cache/
+*.egg-info/
+frontend/node_modules/
+frontend/dist/
+integration/server/test-deps/
+integration/server/test-package/
+integration/server/test-output/
+
+# Local configuration and secrets
+config.local.toml
+config/*.local.json
+.env
+.env.*
+!.env.example
+
+# Patch backups and interrupted edits
+backups/
+*.bak
+*.orig
+*.rej
+
+# Private databases and logs
+*.db
+*.db-wal
+*.db-shm
+*.db-journal
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite3
+*.sqlite3-wal
+*.sqlite3-shm
+*.sqlite3-journal
+*.log
+logs/
+
+# User-supplied weights and model assets
+# Keep generic directory names anchored so backend source packages stay visible.
+/models/
+/model/
+/weights/
+/checkpoints/
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+*.onnx
+*.gguf
+
+# Captured local integration files and author-only acceptance records.
+/integration/server/baseline/
+/integration/server/patched/
+/docs/*-VALIDATION.md
+/docs/GITHUB-READINESS-AUDIT.md
+/docs/screenshots/voice-settings-20261019.png
+/docs/screenshots/preset-order-20261019.png
+/docs/screenshots/maintenance-20261019.png
+
+
+/docs/PUBLICATION-CHECKS.md

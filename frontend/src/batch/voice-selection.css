@@ -1,0 +1,14 @@
+.batch-workbench .batch-sentence-voice {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 6px 10px;
+  margin-bottom: 10px;
+}
+.batch-workbench .batch-sentence-voice label { font-size: .78rem; white-space: nowrap; }
+.batch-workbench .batch-sentence-voice small { grid-column: 1 / -1; color: var(--batch-muted); font-size: .68rem; }
+.batch-workbench .batch-voice-label { font-size: .68rem; color: var(--batch-muted); }
+.batch-workbench .batch-result-copy { min-width: 0; display: flex; align-items: center; gap: 8px; }
+.batch-workbench .batch-result-copy .batch-result-text { flex: 1; }
+.batch-workbench .batch-result-copy .batch-voice-label { max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.batch-workbench .batch-result-actions { grid-column: 5; }

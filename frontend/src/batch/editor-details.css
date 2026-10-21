@@ -1,0 +1,147 @@
+.batch-workbench .batch-text-pane .script-editor {
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-height: 330px;
+  /* The full-text measuring mirror must not enlarge the page's scroll area. */
+  overflow: clip;
+  border-radius: 12px;
+  --script-gutter-width: 66px;
+}
+
+.batch-workbench
+  .batch-text-pane
+  .script-editor
+  .script-editor-textarea {
+  width: 100%;
+  padding-left: calc(14px + var(--script-gutter-width) + 4px);
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  resize: vertical;
+}
+
+.batch-workbench .batch-text-pane .script-editor .script-editor-rail {
+  position: absolute;
+  z-index: 2;
+  width: var(--script-gutter-width);
+  overflow: hidden;
+  border-right: 1px solid var(--batch-line-soft);
+  border-radius: 11px 0 0 11px;
+  background:
+    linear-gradient(90deg, rgba(8, 10, 8, 0.96), rgba(8, 10, 8, 0.74)),
+    rgba(8, 10, 8, 0.8);
+  pointer-events: none;
+}
+
+.batch-workbench .batch-text-pane .script-editor .script-editor-track {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  will-change: transform;
+}
+
+.batch-workbench .batch-text-pane .script-editor .script-editor-marker {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+  height: var(--script-line-height, 23px);
+  margin: 0;
+  padding: 0 5px 0 6px;
+  border: 0;
+  border-left: 2px solid transparent;
+  border-radius: 3px;
+  color: var(--batch-faint);
+  background: transparent;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: normal;
+  line-height: 1;
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.batch-workbench
+  .batch-text-pane
+  .script-editor
+  .script-editor-marker:hover {
+  color: var(--text, #f2f0e9);
+  background: rgba(231, 176, 140, 0.09);
+}
+
+.batch-workbench
+  .batch-text-pane
+  .script-editor
+  .script-editor-marker:focus-visible {
+  outline: 2px solid rgba(231, 176, 140, 0.55);
+  outline-offset: -2px;
+}
+
+.batch-workbench
+  .batch-text-pane
+  .script-editor
+  .script-editor-marker.over-limit {
+  border-left-color: var(--batch-red);
+  color: var(--batch-red);
+  background: rgba(226, 160, 160, 0.08);
+}
+
+.batch-workbench
+  .batch-text-pane
+  .script-editor
+  .script-editor-marker.over-limit:hover {
+  background: rgba(226, 160, 160, 0.14);
+}
+
+.batch-workbench .batch-text-pane .script-editor .script-editor-measure {
+  position: absolute;
+  top: -9999px;
+  left: 0;
+  visibility: hidden;
+  white-space: pre;
+  pointer-events: none;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: normal;
+}
+
+.batch-workbench .batch-text-pane .script-editor .script-editor-mirror {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  visibility: hidden;
+  pointer-events: none;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 0.82rem;
+  line-height: 1.72;
+  tab-size: 4;
+}
+
+.batch-workbench .script-editor-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px 12px;
+  margin: 6px 0 0;
+  color: var(--batch-faint);
+  font-size: 0.63rem;
+  line-height: 1.5;
+}
+
+.batch-workbench .script-editor-legend .warn {
+  color: var(--batch-warm);
+}

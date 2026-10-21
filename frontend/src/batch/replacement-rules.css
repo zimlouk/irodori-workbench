@@ -1,0 +1,52 @@
+.batch-workbench .replacement-rules-editor {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.replacement-rules-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: 0.75rem 1rem;
+  align-items: start;
+}
+
+.replacement-rules-editor .batch-field textarea {
+  width: 100%;
+  min-height: 6.5rem;
+  resize: vertical;
+}
+
+.replacement-rules-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+}
+
+.replacement-rules-state {
+  color: var(--batch-muted);
+  font-size: 0.85rem;
+}
+
+.replacement-rules-state.saved {
+  color: #a7c6ad;
+}
+
+.replacement-rules-notice {
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+.replacement-rules-notice.saving {
+  color: var(--batch-muted);
+}
+
+.replacement-rules-notice.success {
+  color: #a7c6ad;
+}
+
+.replacement-rules-notice.error {
+  color: var(--batch-red, #e2a0a0);
+}

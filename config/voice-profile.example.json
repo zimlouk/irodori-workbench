@@ -1,0 +1,26 @@
+{
+  "works": [
+    [
+      "Example work",
+      [
+        [
+          "speaker_a",
+          "Example speaker A"
+        ],
+        [
+          "speaker_b",
+          "Example speaker B"
+        ]
+      ]
+    ]
+  ],
+  "exclude": [],
+  "defaults": {
+    "seed": null
+  },
+  "families": {
+    "speaker_a": {
+      "duration_scale": 1.0
+    }
+  }
+}

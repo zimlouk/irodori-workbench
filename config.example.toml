@@ -1,0 +1,30 @@
+# Copy to config.local.toml. Relative paths resolve beside this file.
+# Windows local deployment only. Keep API keys in IRODORI_SERVER_API_KEY.
+[workbench]
+mode = "irodori" # Use "fake" to try the UI without a GPU/model.
+port = 8999
+dev_port = 5173
+data_dir = "./data"
+
+[inference]
+launch_mode = "external" # Connect to a running compatible local Server.
+url = "http://127.0.0.1:8998"
+# For managed startup, set launch_mode="managed" and the following paths.
+server_dir = ""
+python = ""
+runtime_dir = ""
+model_home = ""
+checkpoint = ""
+codec = ""
+env_file = "" # Optional Server .env; do not commit private configuration.
+dependency_site_packages = "" # Optional legacy dependency fallback, never required for a clean install.
+
+[lora]
+root = "./models/loras"
+catalog = "./config/loras.json"
+
+[encoding]
+python = "" # Optional soundfile environment for mp3/flac/opus.
+
+[presets]
+profile = "" # Optional character grouping/default profile; see config/voice-profile.example.json.

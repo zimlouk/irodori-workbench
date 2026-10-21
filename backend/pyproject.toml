@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "irodori-workbench"
+version = "0.2.0"
+requires-python = ">=3.11"
+dependencies = ["fastapi", "uvicorn", "sqlalchemy", "alembic", "httpx", "python-multipart"]
+
+[project.optional-dependencies]
+test = ["pytest", "httpx"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
